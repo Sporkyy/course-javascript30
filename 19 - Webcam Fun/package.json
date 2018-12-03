@@ -1,0 +1,18 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const savedUrl = localStorage.getItem('savedUrl');
+  if (savedUrl) {
+    window.location.replace(savedUrl);
+    return;
+  }
+  const affiliations = Array.from(document.querySelectorAll('.affiliation'));
+  const affiliationClicked = event => {
+    const href = event.currentTarget.getAttribute('href');
+    if (!href) return;
+    event.preventDefault();
+    localStorage.setItem('savedUrl', href);
+    window.location.replace(href);
+  }
+  affiliations.forEach(affiliation => {
+    affiliation.addEventListener('click', affiliationClicked);
+  });
+});
